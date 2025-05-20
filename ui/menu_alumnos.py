@@ -27,6 +27,9 @@ def menu_alumnos():
                 continue
             consultas.eliminar_alumno(nie)
             print(f"Alumno {nie} eliminado correctamente.")
+        elif opcion == "4":
+            modificar_alumno()
+
         elif opcion == "0":
             break
         else:

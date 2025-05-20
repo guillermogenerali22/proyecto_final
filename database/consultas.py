@@ -11,7 +11,6 @@ def insertar_alumno(nie, nombre, apellidos, tramo, bilingue):
             VALUES (%s, %s, %s, %s, %s)
         """, (nie, nombre, apellidos, tramo.value, bilingue))
         conexion.commit()
-        print("✅ Alumno insertado correctamente")
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:
@@ -44,7 +43,6 @@ def insertar_libro(isbn, titulo, autor, ejemplares, id_materia, id_curso):
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (isbn, titulo, autor, ejemplares, id_materia, id_curso))
         conexion.commit()
-        print("✅ Libro insertado correctamente")
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:
@@ -89,7 +87,6 @@ def obtener_materias():
     try:
         cursor.execute("SELECT * FROM materias")
         materias = cursor.fetchall()
-        print("✅ Materias cargadas correctamente")
         return materias
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -142,7 +139,6 @@ def insertar_materia(id, nombre, departamento):
             VALUES (%s, %s, %s)
         """, (id, nombre, departamento))
         conexion.commit()
-        print("✅ Materia insertada correctamente")
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:
@@ -160,7 +156,6 @@ def insertar_curso(curso, nivel):
             VALUES (%s, %s)
         """, (curso, nivel))
         conexion.commit()
-        print("✅ Curso insertado correctamente")
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:
@@ -179,7 +174,6 @@ def marcar_devuelto(nie, isbn, curso, fecha_devolucion):
             WHERE lower(nie) = %s AND lower(isbn) = %s AND lower(curso) = %s
         """, ('D', fecha_devolucion, nie, isbn, curso))
         conexion.commit()
-        print("✅ Préstamo marcado como devuelto correctamente")
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:
@@ -194,7 +188,6 @@ def obtener_prestamos_por_nie(nie):
     try:
         cursor.execute("SELECT * FROM alumnoscrusoslibros WHERE lower(nie) = %s", (nie,))
         prestamos = cursor.fetchall()
-        print("✅ Préstamos por NIE cargados correctamente")
         return prestamos
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -225,7 +218,6 @@ def buscar_prestamos_por_nie(nie):
     try:
         cursor.execute("SELECT * FROM alumnoscrusoslibros WHERE lower(nie) = %s", (nie,))
         resultados = cursor.fetchall()
-        print("✅ Búsqueda de préstamos por NIE realizada correctamente")
         return resultados
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -248,7 +240,6 @@ def buscar_prestamos_por_nombre(nombre):
         like_nombre = f"%{nombre}%"
         cursor.execute(sql, (like_nombre, like_nombre))
         resultados = cursor.fetchall()
-        print("✅ Búsqueda de préstamos por nombre realizada correctamente")
         return resultados
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -264,7 +255,6 @@ def buscar_prestamos_por_curso(curso):
     try:
         cursor.execute("SELECT * FROM alumnoscrusoslibros WHERE lower(curso) = %s", (curso,))
         resultados = cursor.fetchall()
-        print("✅ Búsqueda de préstamos por curso realizada correctamente")
         return resultados
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -280,7 +270,6 @@ def buscar_prestamos_por_isbn(isbn):
     try:
         cursor.execute("SELECT * FROM alumnoscrusoslibros WHERE lower(isbn) = %s", (isbn,))
         resultados = cursor.fetchall()
-        print("✅ Búsqueda de préstamos por ISBN realizada correctamente")
         return resultados
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -296,7 +285,6 @@ def buscar_prestamos_por_estado(estado):
     try:
         cursor.execute("SELECT * FROM alumnoscrusoslibros WHERE upper(estado) = %s", (estado,))
         resultados = cursor.fetchall()
-        print("✅ Búsqueda de préstamos por estado realizada correctamente")
         return resultados
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
@@ -316,7 +304,6 @@ def cerrar_prestamo(nie, curso):
             WHERE nie = %s AND curso = %s AND estado = 'P'
         """, (nie, curso))
         conexion.commit()
-        print("✅ Préstamo cerrado correctamente")
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:
@@ -360,7 +347,7 @@ def ver_todos_los_datos():
 
 def vaciar_base_de_datos():
     """
-    Vacía completamente todas las tablas de la base de datos.
+    Vacia completamente todas las tablas de la base de datos.
     """
     print("--- VACIAR BASE DE DATOS ---")
     confirmar = input("¿Deseas vaciar completamente la base de datos? (S/N): ").strip().upper()
@@ -383,31 +370,11 @@ def vaciar_base_de_datos():
 
     cursor = conexion.cursor()
     try:
-        cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
         for tabla in tablas:
             cursor.execute(f"DELETE FROM {tabla};")
-        cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
         conexion.commit()
-        print("✅ Todas las tablas han sido vaciadas correctamente.")
     except Exception as e:
         print(f"❌ Error al vaciar la base de datos: {e}")
-    finally:
-        cursor.close()
-        conexion.close()
-
-def obtener_prestamos():
-    """
-    Obtiene todos los préstamos de la base de datos.
-    """
-    conexion = obtener_conexion()
-    if not conexion:
-        return
-    cursor = conexion.cursor(dictionary=True)
-    try:
-        cursor.execute("SELECT * FROM alumnoscrusoslibros")
-        return cursor.fetchall()
-    except Exception as e:
-        print(f"❌ Error al obtener préstamos: {e}")
     finally:
         cursor.close()
         conexion.close()
@@ -424,7 +391,6 @@ def insertar_alumnoscrusoslibros(nie, curso, isbn, fecha_entrega, fecha_devoluci
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (nie, curso, isbn, fecha_entrega, fecha_devolucion, estado))
         conexion.commit()
-        print("✅ Registro de alumno-curso-libro insertado.")
     except Exception as e:
         print(f"❌ Error al insertar alumno-curso-libro: {e}")
     finally:
@@ -439,7 +405,6 @@ def eliminar_alumno(nie):
     try:
         cursor.execute("DELETE FROM alumnos WHERE nie = %s", (nie,))
         conexion.commit()
-        print(f"✅ Alumno con NIE {nie} eliminado.")
     except Exception as e:
         print(f"❌ Error al eliminar alumno: {e}")
     finally:
@@ -458,7 +423,6 @@ def modificar_alumno(nie, nombre, apellidos, tramo, bilingue):
             WHERE nie = %s
         """, (nombre, apellidos, tramo, bilingue, nie))
         conexion.commit()
-        print("✅ Alumno modificado correctamente.")
     except Exception as e:
         print(f"❌ Error al modificar alumno: {e}")
     finally:

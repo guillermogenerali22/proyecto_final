@@ -2,7 +2,7 @@ import csv
 from database import consultas
 
 def exportar_tabla_csv(nombre_tabla, nombre_archivo):
-    # Llama a la función obtener_* de consultas según tabla
+    # llamando a funciones de obtener en consultas.py
     func = getattr(consultas, f"obtener_{nombre_tabla}", None)
     if func is None:
         print(f"No existe función para obtener datos de {nombre_tabla}")

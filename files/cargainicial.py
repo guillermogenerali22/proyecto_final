@@ -54,16 +54,19 @@ def cargar_alumnoscrusoslibros_csv(path):
             )
 
 def cargar_todo():
-    print("Vaciando base de datos antes de cargar los datos iniciales...")
-    consultas.vaciar_base_de_datos()
+    try:
+        print("Vaciando base de datos antes de cargar los datos iniciales...")
+        consultas.vaciar_base_de_datos()
 
-    cargar_materias_csv("files/up_csv/up_materias.csv")
-    cargar_cursos_csv("files/up_csv/up_cursos.csv")
-    cargar_alumnos_csv("files/up_csv/up_alumnos.csv")
-    cargar_libros_csv("files/up_csv/up_libros.csv")
-    cargar_alumnoscrusoslibros_csv("files/up_csv/up_alumnoscrusoslibros.csv")
+        cargar_materias_csv("files/up_csv/up_materias.csv")
+        cargar_cursos_csv("files/up_csv/up_cursos.csv")
+        cargar_alumnos_csv("files/up_csv/up_alumnos.csv")
+        cargar_libros_csv("files/up_csv/up_libros.csv")
+        cargar_alumnoscrusoslibros_csv("files/up_csv/up_alumnoscrusoslibros.csv")
 
-    print("✅ Datos cargados correctamente.")
+        print("✅ Datos cargados correctamente.")
+    except Exception as e:
+        print(f"❌ Ocurrió un error durante la carga de datos: {e}")
 
 if __name__ == "__main__":
     cargar_todo()

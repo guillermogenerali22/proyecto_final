@@ -11,6 +11,5 @@ if __name__ == "__main__":
 
 #TODO MIRAR DIAGRAMA DE ACTIVIDADES. (VACIARBBD, GESTION LISTADOS, GESTION ERRORES, SUBCASO.)
 
-#todo Preguntar Datos de prueba: es en csv, son insert de sql?
 #todo ventanas
 #todo diagrama de clases.

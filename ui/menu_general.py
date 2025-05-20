@@ -1,6 +1,6 @@
 def menu_general():
     while True:
-        print("\\n--- MENÚ GENERAL ---")
+        print("\n--- MENÚ GENERAL ---")
         print("1. Cargar datos desde CSV")
         print("2. Hacer copia de seguridad CSV")
         print("3. Exportar datos CSV/JSON")
