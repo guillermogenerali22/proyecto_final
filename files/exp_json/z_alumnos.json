@@ -1,0 +1,16 @@
+[
+    {
+        "nie": "Y1234567L",
+        "nombre": "Guillermo Arias Varela",
+        "apellidos": "Arias Varela",
+        "tramo": "0",
+        "bilingue": 0
+    },
+    {
+        "nie": "Z7654321M",
+        "nombre": "Maria",
+        "apellidos": "Lopez",
+        "tramo": "I",
+        "bilingue": 1
+    }
+]

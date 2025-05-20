@@ -1,0 +1,18 @@
+[
+    {
+        "isbn": "9781234567897",
+        "titulo": "Matematicas I",
+        "autor": "Santillana",
+        "numero_ejemplares": 10,
+        "id_materia": 2,
+        "id_curso": "1ºeso"
+    },
+    {
+        "isbn": "9783161484100",
+        "titulo": "",
+        "autor": "Autor De Ejemplo",
+        "numero_ejemplares": 10,
+        "id_materia": 1,
+        "id_curso": "Curso de ejemplo"
+    }
+]

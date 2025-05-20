@@ -1,0 +1,18 @@
+[
+    {
+        "nie": "Y1234567L",
+        "curso": "1ºESO",
+        "isbn": "9781234567897",
+        "fecha_entrega": "2025-05-16",
+        "fecha_devolucion": "2025-05-16",
+        "estado": "P"
+    },
+    {
+        "nie": "Z7654321M",
+        "curso": "Curso de ejemplo",
+        "isbn": "9783161484100",
+        "fecha_entrega": "2025-05-16",
+        "fecha_devolucion": "2025-05-16",
+        "estado": "P"
+    }
+]

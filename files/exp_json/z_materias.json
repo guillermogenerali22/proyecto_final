@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "nombre": "Materia De Ejemplo",
+        "departamento": "Departamento De Ejemplo"
+    },
+    {
+        "id": 2,
+        "nombre": "Matematicas",
+        "departamento": "Matematicas"
+    }
+]
