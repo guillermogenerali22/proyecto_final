@@ -11,5 +11,6 @@ if __name__ == "__main__":
 
 #TODO MIRAR DIAGRAMA DE ACTIVIDADES. (VACIARBBD, GESTION LISTADOS, GESTION ERRORES, SUBCASO.)
 
-#todo ventanas
-#todo diagrama de clases.
+#todo diagrama de clases pasar a diagram.io
+#todo falta hacer funcional la validacion de fechas (que no pueda haber una devolucion de \n
+# prestamo de una fecha anterior a la fecha de entrega.
