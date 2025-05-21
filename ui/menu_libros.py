@@ -48,9 +48,11 @@ def añadir_libro():
 
     try:
         id_materia = int(input("ID de materia: "))
-        id_curso = int(input("ID de curso: "))
+        id_curso = input("ID de curso: ")
     except ValueError:
         print("❌ ID de materia o curso inválido.")
         return
+    else:
+        print("Libro añadido correctamente")
 
     consultas.insertar_libro(isbn, titulo, autor, ejemplares, id_materia, id_curso)

@@ -98,15 +98,36 @@ def registrar_prestamo(nie, curso, isbn, fecha_entrega, fecha_devolucion, estado
     conexion = obtener_conexion()
     if not conexion:
         return
-    cursor = conexion.cursor()
+    cursor = conexion.cursor(dictionary=True)
+
     try:
+        cursor.execute("SELECT numero_ejemplares FROM libros WHERE isbn = %s", (isbn,))
+        resultado = cursor.fetchone()
+
+        if not resultado:
+            print("❌ Libro no encontrado.")
+            return
+
+        ejemplares = resultado["numero_ejemplares"]
+        if ejemplares <= 0:
+            print("❌ No se puede prestar este libro. No hay ejemplares disponibles.")
+            return
+
+        cursor = conexion.cursor()
         cursor.execute("""
             INSERT INTO alumnoscrusoslibros 
             (nie, curso, isbn, fecha_entrega, fecha_devolucion, estado)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (nie, curso, isbn, fecha_entrega, fecha_devolucion, estado.value))
+
+        cursor.execute("""
+            UPDATE libros SET numero_ejemplares = numero_ejemplares - 1
+            WHERE isbn = %s
+        """, (isbn,))
+
         conexion.commit()
         print("✅ Préstamo registrado correctamente")
+
     except Exception as e:
         print(f"❌ Error durante la operación: {e}")
     finally:

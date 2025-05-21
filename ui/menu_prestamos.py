@@ -2,6 +2,7 @@ from database import consultas
 from clases.enum_estados import EstadoPrestamo
 from datetime import datetime
 
+
 def menu_prestamos():
     while True:
         print("\n--- MENÚ PRÉSTAMOS ---")
@@ -58,6 +59,7 @@ def menu_prestamos():
             break
         else:
             print("Opción no válida.")
+
 def generar_contrato():
     nie = input("NIE del alumno: ".lower().strip())
     prestamos = consultas.obtener_prestamos_por_nie(nie)
@@ -83,3 +85,6 @@ def generar_contrato():
         f.write("Firma del centro: __________________________\n")
 
     print(f"Contrato generado: {nombre_archivo}")
+
+
+
