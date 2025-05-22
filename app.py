@@ -13,4 +13,4 @@ if __name__ == "__main__":
 
 #todo diagrama de clases pasar a diagram.io
 #todo falta hacer funcional la validacion de fechas (que no pueda haber una devolucion de \n
-# prestamo de una fecha anterior a la fecha de entrega.
+# prestamo de una fecha ante1rior a la fecha de entrega.

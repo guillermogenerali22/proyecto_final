@@ -61,30 +61,27 @@ def menu_prestamos():
             print("Opción no válida.")
 
 def generar_contrato():
-    nie = input("NIE del alumno: ".lower().strip())
-    prestamos = consultas.obtener_prestamos_por_nie(nie)
 
-    if not prestamos:
-        print("No se encontraron préstamos para ese alumno.")
+    prestamos_cerrados = consultas.obtener_prestamos_cerrados()
+
+    if not prestamos_cerrados:
+        print("❌ No hay préstamos cerrados disponibles.")
         return
 
-    alumno = consultas.obtener_alumno_por_nie(nie)
-    fecha = datetime.now().strftime("%Y-%m-%d")
-    nombre_archivo = f"files/contrato/contrato_{nie}_{fecha}.txt"
+    print("\n--- Préstamos Cerrados Disponibles ---")
+    for i, p in enumerate(prestamos_cerrados, 1):
+        print(f"{i}. NIE: {p['nie']} | Curso: {p['curso']} | ISBN: {p['isbn']} | Entregado: {p['fecha_entrega']} | Devuelto: {p['fecha_devolucion']}")
 
-    with open(nombre_archivo, "w", encoding="utf-8") as f:
-        f.write(f"CONTRATO DE PRÉSTAMO DE LIBROS\n\n")
-        f.write(f"Fecha: {fecha}\n")
-        f.write(f"Alumno: {alumno['nombre']} {alumno['apellidos']} (NIE: {nie})\n")
-        f.write(f"Tramo: {alumno['tramo']} | Bilingüe: {alumno['bilingue']}\n\n")
-        f.write(f"Libros asignados:\n")
-        for p in prestamos:
-            f.write(f" - {p['isbn']} (Curso: {p['curso']}) - Estado: {p['estado']}\n")
+    try:
+        seleccion = int(input("Selecciona un préstamo para generar el contrato (número): "))
+        if not (1 <= seleccion <= len(prestamos_cerrados)):
+            print("❌ Selección inválida.")
+            return
+        prestamo = prestamos_cerrados[seleccion - 1]
+    except ValueError:
+        print("❌ Entrada no válida.")
+        return
 
-        f.write("\nFirma del alumno: __________________________\n")
-        f.write("Firma del centro: __________________________\n")
-
-    print(f"Contrato generado: {nombre_archivo}")
-
-
-
+    # Aquí va tu lógica de generación de contrato
+    print(f"\n📝 Generando contrato para:")
+    print(f"NIE: {prestamo['nie']}, ISBN: {prestamo['isbn']}, Curso: {prestamo['curso']}")

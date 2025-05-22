@@ -94,6 +94,8 @@ def obtener_materias():
         cursor.close()
         conexion.close()
 
+from datetime import datetime
+
 def registrar_prestamo(nie, curso, isbn, fecha_entrega, fecha_devolucion, estado):
     conexion = obtener_conexion()
     if not conexion:
@@ -101,6 +103,10 @@ def registrar_prestamo(nie, curso, isbn, fecha_entrega, fecha_devolucion, estado
     cursor = conexion.cursor(dictionary=True)
 
     try:
+        if fecha_devolucion < fecha_entrega:
+            print("❌ La fecha de devolución no puede ser anterior a la fecha de entrega.")
+            return
+
         cursor.execute("SELECT numero_ejemplares FROM libros WHERE isbn = %s", (isbn,))
         resultado = cursor.fetchone()
 
@@ -113,7 +119,7 @@ def registrar_prestamo(nie, curso, isbn, fecha_entrega, fecha_devolucion, estado
             print("❌ No se puede prestar este libro. No hay ejemplares disponibles.")
             return
 
-        cursor = conexion.cursor()
+        cursor = conexion.cursor()  # para ejecutar sin dictionary=True
         cursor.execute("""
             INSERT INTO alumnoscrusoslibros 
             (nie, curso, isbn, fecha_entrega, fecha_devolucion, estado)
@@ -133,7 +139,6 @@ def registrar_prestamo(nie, curso, isbn, fecha_entrega, fecha_devolucion, estado
     finally:
         cursor.close()
         conexion.close()
-
 def obtener_prestamos():
     conexion = obtener_conexion()
     if not conexion:
@@ -446,6 +451,24 @@ def modificar_alumno(nie, nombre, apellidos, tramo, bilingue):
         conexion.commit()
     except Exception as e:
         print(f"❌ Error al modificar alumno: {e}")
+    finally:
+        cursor.close()
+        conexion.close()
+
+def obtener_prestamos_cerrados():
+    conexion = obtener_conexion()
+    if not conexion:
+        return []
+    cursor = conexion.cursor(dictionary=True)
+    try:
+        cursor.execute("""
+            SELECT * FROM alumnoscrusoslibros
+            WHERE estado = 'D'
+        """)
+        return cursor.fetchall()
+    except Exception as e:
+        print(f"❌ Error al obtener préstamos cerrados: {e}")
+        return []
     finally:
         cursor.close()
         conexion.close()
