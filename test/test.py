@@ -116,7 +116,7 @@ class TestMenus(unittest.TestCase):
         mock_input.side_effect = ["9781234567890", "Matemáticas", "García", "3", "1", "2"]
         from ui.menu_libros import añadir_libro
         añadir_libro()
-        mock_insertar.assert_called_once_with("9781234567890", "Matemáticas", "García", 3, 1, 2)
+        mock_insertar.assert_called_once_with("9781234567890", "Matemáticas", "García", 3, 1, "2")
 
     @patch('database.consultas.modificar_alumno')
     @patch('database.consultas.obtener_alumno_por_nie')

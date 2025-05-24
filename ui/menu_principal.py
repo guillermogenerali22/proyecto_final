@@ -28,7 +28,7 @@ def mostrar_menu_principal():
         print("3. Cursos y Materias")
         print("4. Libros")
         print("5. Préstamos")
-        print("6. Buscar por filtro")
+        print("6. Buscar préstamos por filtro")
         print("7. Base de Datos")
         print("0. Salir")
 

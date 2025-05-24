@@ -5,5 +5,5 @@ DB_PASSWORD = ""
 DB_NAME = "proyectobueno"
 
 # Credenciales para login de administrador
-APP_ADMIN_USER = "" #admin
-APP_ADMIN_PASS = "" #1234
+APP_ADMIN_USER = "admin" #admin
+APP_ADMIN_PASS = "1234" #1234
