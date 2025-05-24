@@ -2,7 +2,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from datetime import date
-from clases.enum_tramos import Tramo
 
 from database import consultas
 

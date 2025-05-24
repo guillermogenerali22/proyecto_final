@@ -8,9 +8,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#TODO MIRAR DIAGRAMA DE ACTIVIDADES. (VACIARBBD, GESTION LISTADOS, GESTION ERRORES, SUBCASO.)
-
-#todo diagrama de clases pasar a diagram.io
-#todo falta hacer funcional la validacion de fechas (que no pueda haber una devolucion de \n
-# prestamo de una fecha ante1rior a la fecha de entrega.
